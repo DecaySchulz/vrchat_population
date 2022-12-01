@@ -1,4 +1,3 @@
-import time
 import vrchatapi
 from vrchatapi.api import system_api
 from pprint import pprint
@@ -34,13 +33,16 @@ center_y = int(screen_height/2 - window_height / 2)
 # set the position of the window to the center of the screen
 window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 
+icon = PhotoImage(file = 'images/icon.png')
+window.iconphoto(False, icon)
+
 try:
     api_response = api_instance.get_current_online_users()
     pprint(api_response)
 except vrchatapi.ApiException as e:
     print("Exception when calling SystemApi->get_current_online_users: %s\n" % e)
 
-label = tk.Label(window, text = "Players Currently Online:", font = ('Arial', 20))
+label = tk.Label(window, text = "Players Currently Online:", font = ('Arial', 20), pady=10)
 label.configure(bg = '#555555')
 label.pack()
 label2 = tk.Label(window, text = api_response, font=('Arial', 50))
@@ -59,8 +61,3 @@ def task():
 window.after(60000, task)
 
 window.mainloop()
-
-
-
-
-
